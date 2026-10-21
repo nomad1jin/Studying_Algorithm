@@ -3,6 +3,7 @@ def solution(nums):
     
     mon = {}
     for num in nums:
+        
         if num not in mon:
             mon[num] = 1
         else:
