@@ -8,8 +8,7 @@ def solution(citations):
             if num >= h:
                 up += 1
                 
-            if up >= h:
-                answer.append(h)
-    answer.sort()            
-   
-    return answer[-1]
+        if up >= h:
+            answer = h
+    
+    return answer
