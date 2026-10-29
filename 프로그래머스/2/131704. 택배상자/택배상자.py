@@ -3,8 +3,7 @@ from collections import deque
 def solution(order):
     answer = 0
     
-    # 크기 같음, 1~n 일렬
-    # 영재는 작은 정렬순으로 꺼냄
+    # 시간 초과 -> pop말고 popleft deque()사용
     priority = deque(sorted(order))
     sub_container = []
     
