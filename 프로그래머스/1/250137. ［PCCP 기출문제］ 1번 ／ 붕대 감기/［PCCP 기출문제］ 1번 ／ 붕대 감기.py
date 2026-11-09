@@ -32,5 +32,4 @@ def solution(bandage, health, attacks):
                 current_health = min(current_health + bandage[2], health)
                 count = 0
 
-        print(current_health)
     return current_health
