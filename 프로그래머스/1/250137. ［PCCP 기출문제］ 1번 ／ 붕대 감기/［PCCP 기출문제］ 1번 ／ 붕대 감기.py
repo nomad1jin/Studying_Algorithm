@@ -1,34 +1,36 @@
 def solution(bandage, health, attacks):
-    # 공격당하면 붕대감기는 취소되고 다시 사용
-    # 체력 0 이하 죽음
-    # 시간과 회복량, 최대 체력, 공격 시간과 피해량 2차원 
-    current_health = health
-    bandage_time = 0
-    attacks_idx = 0
-    last_time = attacks[-1][0]
     
-    for current_time in range(1, last_time + 1):
+    current_health = health
+    count = 0
+    
+    # 시간을 어떻게 카운트함? 초기 체력으로 했으나 틀림 => 마지막 공격 시간
+    # 예제 보면 마지막 공격 언급함!
+    for t in range(0, attacks[-1][0] + 1):
+   
+        count += 1
+        attacked = False   
         
-        #공격
-        if current_time == attacks[attacks_idx][0]:
-            current_health -= attacks[attacks_idx][1]
-            bandage_time = 0
-            attacks_idx += 1
-            
-            #죽으면 종료
-            if current_health <= 0 :
-                return -1 
-            
-        #회복
-        else :
-            current_health += bandage[1]
-            bandage_time += 1
-            if bandage_time == bandage[0]:
-                current_health += bandage[2]
-                bandage_time = 0
+        for attack in attacks:
+            if attack[0] == t:
+                current_health -= attack[1]
+                count = 0
+                attacked = True
                 
-            # 체력 제한
-            current_health = min(health, current_health)
-            
+                # 맞고 나서 현재 체력을 계산해야 return -1 반환 가능.
+                if current_health <= 0:
+                    return -1
+                
+                break
+              
+        
+        # 안 맞은 경우 회복 
+        if attacked == False:
 
+            current_health = min(health, current_health + bandage[1])
+
+            if count == bandage[0]:
+                current_health = min(current_health + bandage[2], health)
+                count = 0
+
+        print(current_health)
     return current_health
